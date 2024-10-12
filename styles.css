@@ -23,7 +23,7 @@ body, html {
     pointer-events: none;
 }
 
-#screen1  {
+#screen1 {
     background-color: #800000;
     background-image: url('assets/images/background.jpg');
     background-size: cover;
@@ -46,7 +46,7 @@ body, html {
     width: 100px;
     height: 100px;
     cursor: pointer;
-    margin-bottom: 20px; /* Add some space between the lamp and the text */
+    margin-bottom: 20px;
 }
 
 #screen2 {
@@ -71,6 +71,21 @@ body, html {
     width: auto;
     height: auto;
     object-fit: contain;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .name-display {

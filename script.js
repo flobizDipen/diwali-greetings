@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const topNameDisplay = document.getElementById('topNameDisplay');
     const marqueeText = document.getElementById('marqueeText');
     const greetingVideo = document.getElementById('greetingVideo');
-
     const marqueeContainer = document.getElementById('marqueeContainer');
+    const greetingContainer = document.querySelector('.greeting-container');
 
     function getNameFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -24,17 +24,44 @@ document.addEventListener('DOMContentLoaded', () => {
         nameInput.value = name;
     }
 
+    function adjustMarqueeWidth() {
+        const videoRect = greetingVideo.getBoundingClientRect();
+        marqueeContainer.style.width = `${videoRect.width}px`;
+        marqueeContainer.style.left = `${videoRect.left}px`;
+    }
+
     function initializeScreen2() {
         const name = getNameFromURL();
         displayName(name);
         updateGreetingBtn.textContent = "Generate yours";
         shareWhatsAppBtn.classList.add('hidden');
         
-        // Adjust marquee container width to match video width
-        const videoWidth = greetingVideo.offsetWidth;
-        marqueeContainer.style.width = `${videoWidth}px`;
+        // Remove existing play button if any
+        const existingPlayButton = greetingContainer.querySelector('.play-button');
+        if (existingPlayButton) {
+            existingPlayButton.remove();
+        }
 
+        const playButton = document.createElement('button');
+        playButton.textContent = 'Play with Sound';
+        playButton.classList.add('play-button');
+        playButton.addEventListener('click', () => {
+            greetingVideo.muted = false;
+            greetingVideo.play();
+            playButton.remove();
+        });
+        greetingContainer.appendChild(playButton);
+
+        greetingVideo.muted = true;
         greetingVideo.play();
+
+        // Adjust marquee width after video metadata is loaded
+        greetingVideo.addEventListener('loadedmetadata', adjustMarqueeWidth);
+        // Also adjust on window resize
+        window.addEventListener('resize', adjustMarqueeWidth);
+
+        // Adjust immediately in case video is already loaded
+        adjustMarqueeWidth();
     }
 
     startLamp.addEventListener('click', () => {
@@ -73,14 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
             screen2.classList.remove('hidden');
             document.querySelector('.input-wrapper').classList.add('hidden');
             shareWhatsAppBtn.classList.remove('hidden');
+            initializeScreen2();
         }
     }
-
-    // Adjust marquee width when window is resized
-    window.addEventListener('resize', () => {
-        const videoWidth = greetingVideo.offsetWidth;
-        marqueeContainer.style.width = `${videoWidth}px`;
-    });
 
     initFromURL();
 });
