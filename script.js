@@ -54,8 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
     shareWhatsAppBtn.addEventListener('click', () => {
         const name = nameInput.value.trim() || 'mySandesh';
         const encodedName = encodeURIComponent(name.replace(/ /g, '_'));
-        const shareUrl = `${window.location.origin}${window.location.pathname}?n=${encodedName}`;
-        const message = encodeURIComponent(`Check out my personalized Diwali greeting: ${shareUrl}`);
+        const shareUrl = `https://flobizdipen.github.io/diwali-greetings/?n=${encodedName}`;
+        const message = encodeURIComponent(`*${name}* ने आपके लिए कुछ भेजा है\nटच करके देखो\n👇 👇\n${shareUrl}`);
         window.open(`https://wa.me/?text=${message}`, '_blank');
     });
 
