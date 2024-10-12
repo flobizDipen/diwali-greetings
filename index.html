@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Diwali Greeting</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="screen1" class="screen">
+        <div class="lamp-container">
+            <img src="assets/images/lamp.gif" alt="Diwali Lamp" id="startLamp" class="lamp">
+            <p>Click the lamp to start</p>
+        </div>
+    </div>
+    <div id="screen2" class="screen hidden">
+        
+        <div class="greeting-container">
+            <video id="greetingVideo" loop playsinline>
+                <source src="assets/images/diwali_greetings.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div id="topNameDisplay" class="name-display"></div>
+            <div id="marqueeContainer" class="marquee-container">
+                <div id="marqueeText" class="marquee"></div>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <div class="input-wrapper">
+                <input type="text" id="nameInput" placeholder="Write your name here">
+                <button id="updateGreeting">Generate yours</button>
+            </div>
+            <button id="shareWhatsApp" class="hidden">Share on WhatsApp</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
